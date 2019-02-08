@@ -1,4 +1,7 @@
 ###### fireice-uk's and psychocrypt's
+# Added
+Added backend dll's as static libs in executable file. CMakeLists.txt: aaded options for build except xmr-stak-dep flags (need to set while building).
+
 # XMR-Stak - Cryptonight All-in-One Mining Software
 
 XMR-Stak is a universal Stratum pool miner. This miner supports CPUs, AMD and NVIDIA GPUs and can be used to mine the crypto currencies Monero, Aeon and many more Cryptonight coins.
