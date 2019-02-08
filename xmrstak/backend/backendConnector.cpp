@@ -65,8 +65,7 @@ std::vector<iBackend*>* BackendConnector::thread_starter(miner_work& pWork)
 	{
 		const std::string backendName = xmrstak::params::inst().openCLVendor;
 		plugin amdplugin;
-		amdplugin.load(backendName, "xmrstak_opencl_backend");
-		std::vector<iBackend*>* amdThreads = amdplugin.startBackend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
+		std::vector<iBackend*>* amdThreads = amdplugin.startBackend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst(), plugin::AMD, backendName);
 		size_t numWorkers = 0u;
 		if(amdThreads != nullptr)
 		{
@@ -89,19 +88,14 @@ std::vector<iBackend*>* BackendConnector::thread_starter(miner_work& pWork)
 		for( const auto & name : libNames)
 		{
 			printer::inst()->print_msg(L0, "NVIDIA: try to load library '%s'", name.c_str());
-			nvidiaplugin.load("NVIDIA", name);
-			std::vector<iBackend*>* nvidiaThreads = nvidiaplugin.startBackend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst());
+			std::vector<iBackend*>* nvidiaThreads = nvidiaplugin.startBackend(static_cast<uint32_t>(pvThreads->size()), pWork, environment::inst(), plugin::NVIDIA, name.c_str());
 			if(nvidiaThreads != nullptr)
 			{
 				pvThreads->insert(std::end(*pvThreads), std::begin(*nvidiaThreads), std::end(*nvidiaThreads));
 				numWorkers = nvidiaThreads->size();
 				delete nvidiaThreads;
 			}
-			else
-			{
-				// remove the plugin if we have found no GPUs
-				nvidiaplugin.unload();
-			}
+
 			// we found at leat one working GPU
 			if(numWorkers != 0)
 			{

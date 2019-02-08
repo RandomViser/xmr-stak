@@ -7,6 +7,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 11)
 
+option(CMAKE_BUILD_TYPE "" Release)
+option(MICROHTTPD_ENABLE "" ON)
+option(OpenSSL_ENABLE "" ON)
+option(CPU_ENABLE "" ON)
+option(HWLOC_ENABLE "" ON)
+option(OpenCL_ENABLE "" ON)
+option(CUDA_ENABLE "" ON)
+
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}" CACHE PATH "install prefix" FORCE)
 endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -539,7 +547,7 @@ if(CUDA_FOUND)
         #  build device code with nvcc
         cuda_add_library(
             xmrstak_cuda_backend
-            SHARED
+            STATIC
             ${CUDASRCFILES}
         )
     endif()
@@ -553,7 +561,7 @@ if(OpenCL_FOUND)
         "xmrstak/backend/amd/amd_gpu/*.cpp"
         "xmrstak/backend/amd/*.cpp")
     add_library(xmrstak_opencl_backend
-        SHARED
+        STATIC
         ${OPENCLSRCFILES}
     )
     target_link_libraries(xmrstak_opencl_backend ${OpenCL_LIBRARY} )
@@ -573,7 +581,7 @@ endif()
 set(EXECUTABLE_OUTPUT_PATH "bin" CACHE STRING "Path to place executables relative to ${CMAKE_INSTALL_PREFIX}")
 set(LIBRARY_OUTPUT_PATH "bin" CACHE STRING "Path to place libraries relative to ${CMAKE_INSTALL_PREFIX}")
 
-target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend xmr-stak-asm)
+target_link_libraries(xmr-stak ${LIBS} xmr-stak-c xmr-stak-backend xmr-stak-asm xmrstak_opencl_backend xmrstak_cuda_backend)
 
 ################################################################################
 # Install

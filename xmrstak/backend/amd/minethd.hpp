@@ -22,6 +22,7 @@ public:
 
 	static std::vector<iBackend*>* thread_starter(uint32_t threadOffset, miner_work& pWork);
 	static bool init_gpus();
+	static std::vector<iBackend*>* xmrstak_start_backend(uint32_t threadOffset, miner_work& pWork, environment& env);
 
 private:
 	typedef void (*cn_hash_fun)(const void*, size_t, void*, cryptonight_ctx**);
