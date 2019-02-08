@@ -9,21 +9,6 @@ Added backend dll's as static libs in executable file. CMakeLists.txt: added opt
 * [Developer Donation](#default-developer-donation)
 * [Developer PGP Key's](doc/pgp_keys.md)
 
-## Features
-
-- support all common backends (CPU/x86, AMD-GPU and NVIDIA-GPU)
-- support all common OS (Linux, Windows and macOS)
-- supports algorithm cryptonight for Monero (XMR) and cryptonight-light (AEON)
-- easy to use
-  - guided start (no need to edit a config file for the first start)
-  - auto-configuration for each backend
-- open source software (GPLv3)
-- TLS support
-- [HTML statistics](doc/usage.md#html-and-json-api-report-configuraton)
-- [JSON API for monitoring](doc/usage.md#html-and-json-api-report-configuraton)
-
-Please note, this list is not complete and is not an endorsement.
-
 ## Download
 
 You can find the latest releases and precompiled binaries on GitHub under [Releases](https://github.com/fireice-uk/xmr-stak/releases).
