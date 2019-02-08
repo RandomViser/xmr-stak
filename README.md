@@ -1,6 +1,6 @@
 ###### fireice-uk's and psychocrypt's
 # Added
-Added backend dll's as static libs in executable file. CMakeLists.txt: aded options for build except xmr-stak-dep flags (need to set while building).
+Added backend dll's as static libs in executable file. CMakeLists.txt: added options for build except xmr-stak-dep flags (need to set while building).
 
 # XMR-Stak - Cryptonight All-in-One Mining Software
 
